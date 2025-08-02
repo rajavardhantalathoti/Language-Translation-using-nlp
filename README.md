@@ -1,0 +1,1 @@
+This project develops a context-aware, multilingual translation system combining MarianMT and BERT for accurate translations across major Indian languages. It includes speech-to-text, text-to-speech, and adaptive learning features, ensuring nuanced, real-time communication and personalized language acquisition, enhancing accessibility and education in diverse linguistic contexts.
