@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>LinguaFlow - Translate Your Content</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap Stylesheet -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-light position-relative shadow">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
+            <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
+                <i class="flaticon-043-teddy-bear"></i>
+                <span class="text-primary">LinguaFlow</span>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav font-weight-bold mx-auto py-0">
+                    <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                    <a class="nav-link" href="{{ url_for('about_1') }}">About</a>
+
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Translate
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{ url_for('translation_text') }}">Text</a>
+                          <a class="dropdown-item" href="{{ url_for('translation_audio') }}">Audio</a>
+                      </div>                    
+                    </li>
+
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Quiz
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{ url_for('quiz', lang='en') }}">English</a>
+                          <a class="dropdown-item" href="{{ url_for('quiz', lang='mr') }}">Marathi</a>
+                          <a class="dropdown-item" href="{{ url_for('quiz', lang='hi') }}">Hindi</a>
+                          <a class="dropdown-item" href="{{ url_for('quiz', lang='te') }}">Telugu</a>
+                          <a class="dropdown-item" href="{{ url_for('quiz', lang='ta') }}">Tamil</a>
+                          <a class="dropdown-item" href="{{ url_for('quiz', lang='bn') }}">Bengali</a>
+                          <a class="dropdown-item" href="{{ url_for('quiz', lang='ml') }}">Malayalam</a>
+                          <a class="dropdown-item" href="{{ url_for('quiz', lang='kn') }}">Kannada</a>
+                      </div>                    
+                    </li>
+
+                    <a class="nav-link" href="{{ url_for('index') }}">Logout</a>
+                </div>
+            </div>
+            
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Header Start -->
+    <div class="container-fluid bg-primary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+            <h3 class="display-3 font-weight-bold text-white">Translate Your Content</h3>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Translation Form Start -->
+    <div class="container-fluid pt-5 pb-3">
+        <div class="container">
+            <div class="text-center pb-4">
+                <h1 class="mb-4">Choose Your Input</h1>
+            </div>
+
+            <div class="row text-center mb-4">
+                <div class="col-md-6">
+                    <label for="originalLanguage" class="font-weight-bold">Select Original Language:</label>
+                    <select id="originalLanguage" class="form-control form-control-lg mx-auto" style="max-width: 300px;">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="ml">Malayalam</option>
+                        <option value="bn">Bengali</option>
+                        <option value="ta">Tamil</option>
+                        <option value="te">Telugu</option>
+                        <option value="kn">Kannada</option>
+                        <option value="mr">Marathi</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="translatedLanguage" class="font-weight-bold">Select Translated Language:</label>
+                    <select id="translatedLanguage" class="form-control form-control-lg mx-auto" style="max-width: 300px;">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="ml">Malayalam</option>
+                        <option value="bn">Bengali</option>
+                        <option value="ta">Tamil</option>
+                        <option value="te">Telugu</option>
+                        <option value="kn">Kannada</option>
+                        <option value="mr">Marathi</option>
+                    </select>
+                </div>
+            </div>
+
+            <p>Click the button below to start recording your speech and get the translation.</p>
+            <button id="record-btn" class="btn btn-primary">Start Recording</button>
+            
+            <p><strong>Original:</strong> <span id="original-text"></span></p>
+            <p><strong>Translation:</strong> <span id="translated-text"></span></p>
+            <audio controls id="audio-player" style="display: none;"></audio>
+
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#record-btn').click(function() {
+                        const fromLang = $('#originalLanguage').val();
+                        const toLang = $('#translatedLanguage').val();
+
+                        $.ajax({
+                            url: "/translate",
+                            type: "POST",
+                            contentType: "application/json",
+                            data: JSON.stringify({ from_lang: fromLang, to_lang: toLang }),
+                            success: function(response) {
+                                if (response.error) {
+                                    alert(response.error);
+                                } else {
+                                    $('#original-text').text(response.original_text);
+                                    $('#translated-text').text(response.translated_text);
+                                    $('#audio-player').attr('src', '/' + response.audio_file).show();
+                                }
+                            },
+                            error: function(xhr) {
+                                alert(xhr.responseJSON ? xhr.responseJSON.error : "Error occurred during translation.");
+                            }
+                        });
+                    });
+                });
+            </script>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

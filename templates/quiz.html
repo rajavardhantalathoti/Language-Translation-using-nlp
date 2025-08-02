@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>KidKinder - Kindergarten Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="/static/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Flaticon Font -->
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-light position-relative shadow">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
+            <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
+                <i class="flaticon-043-teddy-bear"></i>
+                <span class="text-primary">LinguaFlow</span>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav font-weight-bold mx-auto py-0">
+                    <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                    <a class="nav-link" href="{{ url_for('about_1') }}">About</a>
+
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Translate
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{ url_for('translation_text') }}">Text</a>
+                          <a class="dropdown-item" href="{{ url_for('translation_audio') }}">Audio</a>
+                      </div>                    
+                    </li>
+
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Quiz
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{ url_for('quiz', lang='en') }}">English</a>
+                          <a class="dropdown-item" href="{{ url_for('quiz', lang='mr') }}">Marathi</a>
+                          <a class="dropdown-item" href="{{ url_for('quiz', lang='hi') }}">Hindi</a>
+                          <a class="dropdown-item" href="{{ url_for('quiz', lang='te') }}">Telugu</a>
+                          <a class="dropdown-item" href="{{ url_for('quiz', lang='ta') }}">Tamil</a>
+                          <a class="dropdown-item" href="{{ url_for('quiz', lang='bn') }}">Bengali</a>
+                          <a class="dropdown-item" href="{{ url_for('quiz', lang='ml') }}">Malayalam</a>
+                          <a class="dropdown-item" href="{{ url_for('quiz', lang='kn') }}">Kannada</a>
+                      </div>                    
+                    </li>
+
+                    <a class="nav-link" href="{{ url_for('index') }}">Logout</a>
+                </div>
+            </div>
+            
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Header Start -->
+    <div class="container-fluid bg-primary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+            <h3 class="display-3 font-weight-bold text-white">Learn by Quiz</h3>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <section id="auth-section" class="auth_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-box">
+                        <div id="quiz-form" class="form-container active">
+                            {% if quizzes_list %}
+                                <form action="{{ url_for('quiz', lang=lang) }}" method="POST"> <!-- Form posts back to quiz route -->
+        
+                                    {% for quiz in quizzes_list %}
+                                        <div class="form-group">
+                                            <label>Question {{ loop.index }}: {{ quiz.question }}</label>
+                                            {% for option in quiz.options %}
+                                                <div class="form-check">
+                                                    <input type="radio" class="form-check-input" name="answer_{{ quiz.id }}" value="{{ option.value }}" required>
+                                                    <label class="form-check-label">{{ option.label }}</label>  <!-- Translated option text -->
+                                                </div>
+                                            {% endfor %}
+                                        </div><br>
+                                    {% endfor %}
+        
+                                    <button type="submit" class="btn btn-primary">Submit Quiz</button><br><br>
+                                </form>
+                            {% endif %}
+    
+                            <!-- Flash message to show results -->
+                            {% if feedback_list %}
+                                <div class="alert alert-info">
+                                    <h3>Quiz Results</h3>
+                                    <p>You answered {{ feedback_list | length }} questions.</p>
+                                    <p>Score: {{ score_percentage }}%</p>
+                                    <ul>
+                                        {% for feedback in feedback_list %}
+                                            <li>
+                                                <strong>Question {{ feedback.question_number }}:</strong> {{ feedback.question }}<br>
+                                                Your answer: {{ feedback.user_answer }}<br>
+                                                Correct answer: {{ feedback.correct_answer }}<br>
+                                                {% if feedback.is_correct %}
+                                                    <span style="color: green;">Correct</span>
+                                                {% else %}
+                                                    <span style="color: red;">Incorrect</span>
+                                                {% endif %}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div><br><br>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>

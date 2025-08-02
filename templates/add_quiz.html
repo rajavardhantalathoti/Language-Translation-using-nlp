@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>KidKinder - Kindergarten Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="/static/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Flaticon Font -->
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+<style>
+    .form-container {
+      display: none;
+    }
+    .form-container.active {
+      display: block;
+    }
+    .auth_section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-image: url('/static/images/juan-davila-P8PlK2nGwqA-unsplash.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    .form-box {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+    .form-box h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .form-box .form-group {
+      margin-bottom: 15px;
+    }
+    .form-box .btn {
+      width: 100%;
+    }
+    .form-box p {
+      margin-top: 15px;
+      text-align: center;
+    }
+    .form-box p a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    .form-box p a:hover {
+      text-decoration: underline;
+    }
+    .alert-container {
+      margin-bottom: 20px;
+    }
+    .alert {
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    .alert-danger {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+    .alert-info {
+      background-color: #d1ecf1;
+      color: #0c5460;
+    }
+  </style>
+</head>
+<body>
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-light position-relative shadow">
+      <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
+          <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
+              <i class="flaticon-043-teddy-bear"></i>
+              <span class="text-primary">LinguaFlow</span>
+          </a>
+          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+              <div class="navbar-nav font-weight-bold mx-auto py-0">
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('admin_home') }}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link active" href="{{ url_for('add_quiz') }}">Add Quiz</a>
+                  </li>
+                  <li class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Manage Quiz
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{ url_for('quiz_list', lang='en') }}">English</a>
+                      <a class="dropdown-item" href="{{ url_for('quiz_list', lang='mr') }}">Marathi</a>
+                      <a class="dropdown-item" href="{{ url_for('quiz_list', lang='hi') }}">Hindi</a>
+                      <a class="dropdown-item" href="{{ url_for('quiz_list', lang='te') }}">Telugu</a>
+                      <a class="dropdown-item" href="{{ url_for('quiz_list', lang='ta') }}">Tamil</a>
+                      <a class="dropdown-item" href="{{ url_for('quiz_list', lang='bn') }}">Bengali</a>
+                      <a class="dropdown-item" href="{{ url_for('quiz_list', lang='ml') }}">Malayalam</a>
+                      <a class="dropdown-item" href="{{ url_for('quiz_list', lang='kn') }}">Kannada</a>
+                  </div>                    
+                </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('index') }}">Logout</a>
+                  </li>
+              </div>
+          </div>
+      </nav>        
+  </div>
+    <!-- Navbar End -->
+
+
+    <!-- Header Start -->
+    <div class="container-fluid bg-primary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+            <h3 class="display-3 font-weight-bold text-white">Add Quiz</h3>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- auth section starts -->
+    <section id="auth-section" class="auth_section">
+        <div class="form-box">
+
+            <!-- Alert messages -->
+            <div class="alert-container">
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+
+            <!-- Login Form -->
+            <div id="login-form" class="form-container active">
+                <h2>Quiz Details</h2>
+                <form action="{{ url_for('add_quiz') }}" method="POST">
+                    <div class="form-group">
+                      <label>Select Language</label>
+                      <select class="form-control" name="language" required>
+                        <option value="">Choose Language</option>
+                        <option value="en">English</option>
+                        <option value="mr">Marathi</option>
+                        <option value="hi">Hindi</option>
+                        <option value="te">Telugu</option>
+                        <option value="ta">Tamil</option>
+                        <option value="bn">Bengali</option>
+                        <option value="ml">Malayalam</option>
+                        <option value="kn">Kannada</option>
+                      </select>
+                    </div><br>
+                  
+                    <div class="form-group">
+                        <label>Add Question</label>
+                        <textarea class="form-control" name="question" required style="height: 80px;"></textarea>
+                    </div><br>
+
+                    <div class="form-group">
+                        <label>Add Answer</label>
+                        <textarea class="form-control" name="answer" required></textarea>
+                    </div><br>
+
+                    <div class="form-group">
+                        <label>Add options</label>
+                        <input type="text" class="form-control" name="opt1" placeholder="Option 1" required><br>
+                        <input type="text" class="form-control" name="opt2" placeholder="Option 2" required><br>
+                        <input type="text" class="form-control" name="opt3" placeholder="Option 3" required><br>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            
+        </div>
+    </section>
+    <!-- auth section ends -->
+    
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>

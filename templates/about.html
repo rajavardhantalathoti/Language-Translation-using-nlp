@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>KidKinder - Kindergarten Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="/static/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Flaticon Font -->
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-light position-relative shadow">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
+            <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
+                <i class="flaticon-043-teddy-bear"></i>
+                <span class="text-primary">LinguaFlow</span>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav font-weight-bold mx-auto py-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('about') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                    </li>
+                </div>
+                <!-- <a href="" class="btn btn-primary px-4">Join Class</a> -->
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Header Start -->
+    <div class="container-fluid bg-primary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+            <h3 class="display-3 font-weight-bold text-white">About Us</h3>
+            <div class="d-inline-flex text-white">
+                <p class="m-0"><a class="text-white" href="{{ url_for('index') }}">Home</a></p>
+                <p class="m-0 px-2">/</p>
+                <p class="m-0"><a class="text-white" href="{{ url_for('login') }}">Login</a></p>
+                <!-- <p class="m-0">About Us</p> -->
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <img class="img-fluid rounded mb-5 mb-lg-0" src="/static/img/kelly-sikkema-IkHwu5xLXxs-unsplash.jpg" alt="About Us Image" style="height: 550px; width: 450px;">
+                </div>
+                <div class="col-lg-7">
+                    <p class="section-title pr-5"><span class="pr-2">Learn About Us</span></p>
+                    <h1 class="mb-4">Advanced Language Translation</h1>
+                    <p>Our platform uses cutting-edge NLP to provide accurate, real-time translations across Indian languages. With integrated speech-to-text and text-to-speech, we offer seamless audio processing and adaptive learning to enhance language acquisition.</p>
+                    <div class="row pt-2 pb-4">
+                        <div class="col-6 col-md-4">
+                            <img class="img-fluid rounded" src="/static/img/kelly-sikkema-Y63DCcIKlIs-unsplash.jpg" alt="Feature Image" >
+                        </div>
+                        <div class="col-6 col-md-8">
+                            <ul class="list-inline m-0">
+                                <li class="py-2 border-top border-bottom"><i class="fa fa-check text-primary mr-3"></i>Real-time translations</li>
+                                <li class="py-2 border-bottom"><i class="fa fa-check text-primary mr-3"></i>Seamless audio processing</li>
+                                <li class="py-2 border-bottom"><i class="fa fa-check text-primary mr-3"></i>Adaptive learning features</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="" class="btn btn-primary mt-2 py-2 px-4">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+
+
+    <!-- Facilities Start -->
+    <!-- Facilities Start -->
+    <div class="container-fluid pt-5">
+        <div class="container pb-3">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
+                        <i class="flaticon-050-fence h1 font-weight-normal text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4>English</h4>
+                            <p class="m-0">Our platform provides seamless translation services.</p>
+                            <p class="m-0">Explore advanced language processing features for English learners.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
+                        <i class="flaticon-022-drum h1 font-weight-normal text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4>मराठी (Marathi)</h4>
+                            <p class="m-0">आमचा प्लॅटफॉर्म सहज भाषांतर सेवा प्रदान करतो.</p>
+                            <p class="m-0">मराठी शिकणाऱ्यांसाठी प्रगत भाषेच्या प्रक्रिया वैशिष्ट्यांचा अनुभव घ्या.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
+                        <i class="flaticon-030-crayons h1 font-weight-normal text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4>हिंदी (Hindi)</h4>
+                            <p class="m-0">हमारा प्लेटफ़ॉर्म निर्बाध अनुवाद सेवाएं प्रदान करता है।</p>
+                            <p class="m-0">हिंदी सीखने वालों के लिए उन्नत भाषा प्रसंस्करण सुविधाओं का अन्वेषण करें।</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
+                        <i class="flaticon-017-toy-car h1 font-weight-normal text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4>తెలుగు (Telugu)</h4>
+                            <p class="m-0">మా ప్లాట్‌ఫారమ్ సులభంగా అనువాద సేవలను అందిస్తుంది.</p>
+                            <p class="m-0">తెలుగు నేర్చుకునే వారికి అధునాతన భాషా ప్రాసెసింగ్ ఫీచర్‌లను అన్వేషించండి.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
+                        <i class="flaticon-025-sandwich h1 font-weight-normal text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4>தமிழ் (Tamil)</h4>
+                            <p class="m-0">எங்கள் தளம் எளிதான மொழிபெயர்ப்பு சேவைகளை வழங்குகிறது.</p>
+                            <p class="m-0">தமிழ் கற்றுக்கொள்பவர்களுக்கு மேம்பட்ட மொழி செயலாக்க அம்சங்களை ஆய்வு செய்யுங்கள்.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
+                        <i class="flaticon-047-backpack h1 font-weight-normal text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4>বাংলা (Bengali)</h4>
+                            <p class="m-0">আমাদের প্ল্যাটফর্মটি নিরবচ্ছিন্ন অনুবাদ পরিষেবা প্রদান করে।</p>
+                            <p class="m-0">বাংলা শিক্ষার্থীদের জন্য উন্নত ভাষা প্রক্রিয়াকরণ বৈশিষ্ট্যগুলি অন্বেষণ করুন।</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
+                        <i class="flaticon-025-sandwich h1 font-weight-normal text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4>മലയാളം (Malayalam)</h4>
+                            <p class="m-0">നമ്മുടെ പ്ലാറ്റ്‌ഫോം പ്രശ്നരഹിതമായ പരിഭാഷ സേവനങ്ങൾ നൽകുന്നു.</p>
+                            <p class="m-0">മലയാളം പഠിക്കുന്നവർക്ക് മെച്ചപ്പെട്ട ഭാഷ പ്രോസസ്സിംഗ് സവിശേഷതകൾ പരിശോധിക്കൂ.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
+                        <i class="flaticon-025-sandwich h1 font-weight-normal text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4>ಕನ್ನಡ (Kannada)</h4>
+                            <p class="m-0">ನಮ್ಮ ವೇದಿಕೆ ನಿರಂತರ ಅನುವಾದ ಸೇವೆಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ.</p>
+                            <p class="m-0">ಕನ್ನಡ ಕಲಿಯುವವರಿಗೆ ಪ್ರಗತಿಶೀಲ ಭಾಷಾ ಪ್ರಕ್ರಿಯೆ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಅನುಭವಿಸಿ.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Facilities End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>
